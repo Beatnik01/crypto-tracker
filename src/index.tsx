@@ -1,14 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./App";
-import { ThemeProvider } from "styled-components";
-import { darkTheme, lightTheme } from "./theme";
+import { RouterProvider } from "react-router";
+import router from "./Router";
 
 ReactDOM.render(
   <React.StrictMode>
-    <ThemeProvider theme={darkTheme}>
-      <App />
-    </ThemeProvider>
+    <RouterProvider router={router} />
   </React.StrictMode>,
   document.getElementById("root")
 );
