@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-import Root from "./Root";
+import Root from "./App";
 import Coin from "./routes/Coin";
 import Coins from "./routes/Coins";
 import Chart from "./routes/Chart";
