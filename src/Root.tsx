@@ -1,9 +1,9 @@
 import { Outlet } from "react-router";
 import Header from "./components/Header";
 import { createGlobalStyle } from "styled-components";
+import { Helmet } from "react-helmet-async";
 
 const GlobalStyle = createGlobalStyle`
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap');
 font-family: 'Source Sans Pro', sans-serif;
   html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -67,6 +67,9 @@ a {
 function Root() {
   return (
     <>
+      <Helmet>
+        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap" />
+      </Helmet>
       <GlobalStyle />
       <Header />
       <Outlet />
