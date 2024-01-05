@@ -2,7 +2,7 @@ import { useQuery } from "react-query";
 import { Link, useMatch } from "react-router-dom";
 import { Outlet, useLocation, useParams } from "react-router-dom";
 import styled from "styled-components";
-import { fetchCoinInfo } from "../api";
+import { fetchCoinInfo, fetchCoinTickers } from "../api";
 
 const Container = styled.div`
   padding: 0px 20px;
@@ -151,7 +151,7 @@ function Coin() {
   );
   const { isLoading: trickersLoading, data: trickersData } = useQuery<PriceData>(
     ["trickers", coinId],
-    () => fetchCoinInfo(coinId)
+    () => fetchCoinTickers(coinId)
   );
   const loading = infoLoading || trickersLoading;
   return (

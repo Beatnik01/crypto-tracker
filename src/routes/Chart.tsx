@@ -33,10 +33,32 @@ function Chart() {
           series={[
             {
               name: "close",
-              data: data?.map((price) => parseFloat(price.close)) ?? [],
+              data: data?.map((price) => Number(price.close)) ?? [],
             },
           ]}
-          options={{ chart: { height: 500, width: 500 } }}
+          options={{
+            theme: { mode: "dark" },
+            chart: {
+              height: 500,
+              width: 500,
+              toolbar: {
+                show: false,
+              },
+              background: "transparent",
+            },
+            stroke: {
+              curve: "smooth",
+              width: 4,
+            },
+            yaxis: {
+              show: false,
+            },
+            xaxis: {
+              axisBorder: { show: false },
+              axisTicks: { show: false },
+              labels: { show: false },
+            },
+          }}
         />
       )}
     </div>
