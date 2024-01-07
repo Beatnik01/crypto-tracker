@@ -3,6 +3,7 @@ import { Link, useMatch } from "react-router-dom";
 import { Outlet, useLocation, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { fetchCoinInfo, fetchCoinTickers } from "../api";
+import { Helmet } from "react-helmet-async";
 
 const Container = styled.div`
   padding: 0px 20px;
@@ -13,7 +14,7 @@ const Container = styled.div`
 const Header = styled.header`
   height: 10vh;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 `;
 
@@ -21,6 +22,8 @@ const Title = styled.h1`
   font-size: 48px;
   color: ${(props) => props.theme.accectColor};
 `;
+
+const TitleBtn = styled.a``;
 
 const Loader = styled.span`
   text-align: center;
@@ -57,6 +60,7 @@ const OverviewItem = styled.div`
 
 const Description = styled.p`
   margin: 20px 0px;
+  text-align: justify;
 `;
 
 const Tabs = styled.div`
@@ -67,14 +71,16 @@ const Tabs = styled.div`
 `;
 
 const Tab = styled.span<{ $isActive: boolean }>`
+  position: relative;
   text-align: center;
   text-transform: uppercase;
-  font-size: 12px;
-  font-weight: 400;
-  background-color: rgba(0, 0, 0, 0.5);
+  font-size: 20px;
+  font-weight: 600;
   padding: 7px 0px;
   border-radius: 10px;
   color: ${(props) => (props.$isActive ? props.theme.accectColor : props.theme.textColor)};
+  text-decoration: ${(props) => (props.$isActive ? "solid underline 3px" : "none")};
+  transition: color 0.2s ease-in;
   a {
     display: block;
   }
@@ -156,11 +162,16 @@ function Coin() {
   const loading = infoLoading || trickersLoading;
   return (
     <Container>
+      <Helmet>
+        <title>{state?.name || infoData?.name}</title>
+      </Helmet>
       <Header>
+        <TitleBtn>←</TitleBtn>
         <Title>
           <Img src={`https://cryptocurrencyliveprices.com/img/${coinId}.png`} />
           {state?.name || infoData?.name}
         </Title>
+        <TitleBtn></TitleBtn>
       </Header>
       {loading ? (
         <Loader>Loading...</Loader>
@@ -173,11 +184,11 @@ function Coin() {
             </OverviewItem>
             <OverviewItem>
               <span>Symbol</span>
-              <span>${infoData?.symbol}</span>
+              <span>{infoData?.symbol}</span>
             </OverviewItem>
             <OverviewItem>
-              <span>Open Source</span>
-              <span>{infoData?.open_source ? "Yes" : "No"}</span>
+              <span>Price</span>
+              <span>${trickersData?.quotes.USD.price.toFixed(0)}</span>
             </OverviewItem>
           </Overview>
           <Description>{infoData?.description}</Description>
