@@ -23,7 +23,10 @@ const Title = styled.h1`
   color: ${(props) => props.theme.accectColor};
 `;
 
-const TitleBtn = styled.a``;
+const TitleBtn = styled.a`
+  font-size: 30px;
+  font-weight: 800;
+`;
 
 const Loader = styled.span`
   text-align: center;
@@ -166,12 +169,14 @@ function Coin() {
         <title>{state?.name || infoData?.name}</title>
       </Helmet>
       <Header>
-        <TitleBtn>←</TitleBtn>
+        <TitleBtn>
+          <Link to={"/"}>←</Link>
+        </TitleBtn>
         <Title>
           <Img src={`https://cryptocurrencyliveprices.com/img/${coinId}.png`} />
           {state?.name || infoData?.name}
         </Title>
-        <TitleBtn></TitleBtn>
+        <TitleBtn>→</TitleBtn>
       </Header>
       {loading ? (
         <Loader>Loading...</Loader>

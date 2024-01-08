@@ -54,11 +54,7 @@ function Chart() {
               show: false,
             },
             xaxis: {
-              axisBorder: { show: false },
-              axisTicks: { show: false },
-              labels: { show: false },
               type: "datetime",
-              categories: data?.map((price) => new Date(price.time_close * 1000).toISOString()),
             },
             fill: {
               type: "gradient",

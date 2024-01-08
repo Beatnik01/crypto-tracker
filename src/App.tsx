@@ -1,5 +1,4 @@
 import { Outlet } from "react-router";
-import Header from "./components/Header";
 import { createGlobalStyle } from "styled-components";
 import { Helmet } from "react-helmet-async";
 import { ReactQueryDevtools } from "react-query/devtools";
@@ -73,7 +72,6 @@ function App() {
       </Helmet>
       <GlobalStyle />
       <ReactQueryDevtools initialIsOpen={true} />
-      <Header />
       <Outlet />
     </>
   );
