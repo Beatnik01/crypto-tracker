@@ -29,18 +29,31 @@ function Chart() {
         "Loading chart..."
       ) : (
         <ApexCharts
-          type="line"
           series={[
             {
               name: "Price",
-              data: data?.map((price) => Number(price.close)) ?? [],
+              type: "line",
+              data: Array.isArray(data)
+                ? data?.map((price) => ({
+                    x: new Date(price.time_close),
+                    y: [price.high],
+                  }))
+                : [],
+            },
+            {
+              name: "Candle",
+              type: "candlestick",
+              data: Array.isArray(data)
+                ? data?.map((price) => ({
+                    x: new Date(price.time_close),
+                    y: [price.open, price.high, price.low, price.close],
+                  }))
+                : [],
             },
           ]}
           options={{
             theme: { mode: "dark" },
             chart: {
-              height: 500,
-              width: 500,
               toolbar: {
                 show: false,
               },
@@ -48,23 +61,17 @@ function Chart() {
             },
             stroke: {
               curve: "smooth",
-              width: 4,
+              width: 1,
             },
             yaxis: {
               show: false,
             },
             xaxis: {
+              labels: { show: false },
               type: "datetime",
             },
-            fill: {
-              type: "gradient",
-              gradient: { gradientToColors: ["#0be881"], stops: [0, 100] },
-            },
-            colors: ["#0fbcf9"],
             tooltip: {
-              y: {
-                formatter: (value) => `$${value.toFixed(2)}`,
-              },
+              shared: false,
             },
           }}
         />

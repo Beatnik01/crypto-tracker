@@ -23,7 +23,7 @@ const Title = styled.h1`
   color: ${(props) => props.theme.accectColor};
 `;
 
-const TitleBtn = styled.a`
+const TitleBtn = styled.div`
   font-size: 30px;
   font-weight: 800;
 `;
@@ -52,14 +52,16 @@ const OverviewItem = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  span:first-child {
-    font-size: 10px;
-    font-weight: 400;
-    text-transform: uppercase;
-    margin-bottom: 5px;
-  }
 `;
+
+const Prices = styled.div`
+  display: flex;
+  gap: 10px;
+`;
+
+const Price = styled.span``;
+
+const Change = styled.span``;
 
 const Description = styled.p`
   margin: 20px 0px;
@@ -83,6 +85,7 @@ const Tab = styled.span<{ $isActive: boolean }>`
   border-radius: 10px;
   color: ${(props) => (props.$isActive ? props.theme.accectColor : props.theme.textColor)};
   text-decoration: ${(props) => (props.$isActive ? "solid underline 3px" : "none")};
+  text-underline-position: under;
   transition: color 0.2s ease-in;
   a {
     display: block;
@@ -188,15 +191,18 @@ function Coin() {
               <span>{infoData?.rank}</span>
             </OverviewItem>
             <OverviewItem>
+              <span>Price</span>
+              <Prices>
+                <Price>${trickersData?.quotes.USD.price.toFixed(0)}</Price>
+                <Change>{trickersData?.quotes.USD.percent_change_15m}</Change>
+              </Prices>
+            </OverviewItem>
+            <OverviewItem>
               <span>Symbol</span>
               <span>{infoData?.symbol}</span>
             </OverviewItem>
-            <OverviewItem>
-              <span>Price</span>
-              <span>${trickersData?.quotes.USD.price.toFixed(0)}</span>
-            </OverviewItem>
           </Overview>
-          <Description>{infoData?.description}</Description>
+          <Description></Description>
           <Overview>
             <OverviewItem>
               <span>Total Suply</span>
