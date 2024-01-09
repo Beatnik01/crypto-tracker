@@ -18,11 +18,16 @@ interface IHistorycal {
   market_cap: number;
 }
 
+interface IIsDark {
+  isDark: boolean;
+}
+
 function Chart() {
   const { coinId } = useOutletContext<ICoinID>();
   const { isLoading, data } = useQuery<IHistorycal[]>(["ohlcv", coinId], () =>
     fetchCoinHistory(coinId)
   );
+  const { isDark } = useOutletContext<IIsDark>();
   return (
     <div>
       {isLoading ? (
@@ -52,7 +57,7 @@ function Chart() {
             },
           ]}
           options={{
-            theme: { mode: "dark" },
+            theme: { mode: isDark ? "dark" : "light" },
             chart: {
               toolbar: {
                 show: false,

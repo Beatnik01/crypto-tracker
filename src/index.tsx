@@ -2,8 +2,6 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import { RouterProvider } from "react-router";
 import router from "./Router";
-import { ThemeProvider } from "styled-components";
-import { theme } from "./theme";
 import { HelmetProvider } from "react-helmet-async";
 import { QueryClient, QueryClientProvider } from "react-query";
 
@@ -17,9 +15,7 @@ root.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <HelmetProvider>
-        <ThemeProvider theme={theme}>
-          <RouterProvider router={router} />
-        </ThemeProvider>
+        <RouterProvider router={router} />
       </HelmetProvider>
     </QueryClientProvider>
   </React.StrictMode>

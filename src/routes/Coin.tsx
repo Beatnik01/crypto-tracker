@@ -1,5 +1,5 @@
 import { useQuery } from "react-query";
-import { Link, useMatch } from "react-router-dom";
+import { Link, useMatch, useOutletContext } from "react-router-dom";
 import { Outlet, useLocation, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { fetchCoinInfo, fetchCoinTickers } from "../api";
@@ -152,6 +152,10 @@ interface PriceData {
   };
 }
 
+interface IIsDark {
+  isDark: boolean;
+}
+
 function Coin() {
   const { coinId } = useParams<"coinId">();
   if (!coinId) throw new Error("Failed to find the coinId!");
@@ -166,6 +170,7 @@ function Coin() {
     () => fetchCoinTickers(coinId)
   );
   const loading = infoLoading || trickersLoading;
+  const { isDark } = useOutletContext<IIsDark>();
   return (
     <Container>
       <Helmet>
