@@ -3,7 +3,8 @@ import { ThemeProvider, createGlobalStyle } from "styled-components";
 import { Helmet } from "react-helmet-async";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { darkTheme, lightTheme } from "./theme";
-import { useState } from "react";
+import { useRecoilValue } from "recoil";
+import { isDarkAtom } from "./atoms";
 
 const GlobalStyle = createGlobalStyle`
 font-family: 'Source Sans Pro', sans-serif;
@@ -67,8 +68,7 @@ a {
 `;
 
 function App() {
-  const [isDark, setIsDark] = useState(false);
-  const toggleDark = () => setIsDark((current) => !current);
+  const isDark = useRecoilValue(isDarkAtom);
   return (
     <>
       <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
@@ -77,7 +77,7 @@ function App() {
         </Helmet>
         <GlobalStyle />
         <ReactQueryDevtools initialIsOpen={true} />
-        <Outlet context={{ toggleDark, isDark }} />
+        <Outlet />
       </ThemeProvider>
     </>
   );
