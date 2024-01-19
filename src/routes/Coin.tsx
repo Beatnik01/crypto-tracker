@@ -174,7 +174,7 @@ function Coin() {
       </Helmet>
       <Header>
         <TitleBtn>
-          <Link to={"/"}>🏠</Link>
+          <Link to={"/crypto-tracker"}>🏠</Link>
         </TitleBtn>
         <Title>
           <Img src={`https://cryptocurrencyliveprices.com/img/${coinId}.png`} />

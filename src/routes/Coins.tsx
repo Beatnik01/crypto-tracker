@@ -69,6 +69,7 @@ const ToggleButton = styled.button`
   border: none;
   background-color: ${(props) => props.theme.divColor};
   font-size: 20px;
+  cursor: pointer;
 `;
 
 interface ICoin {
