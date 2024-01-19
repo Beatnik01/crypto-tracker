@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { fetchCoins } from "../api";
 import { Helmet } from "react-helmet-async";
-import { useSetRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { isDarkAtom } from "../atoms";
 
 const Container = styled.div`
@@ -17,12 +17,13 @@ const Header = styled.header`
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 `;
 
 const CoinsList = styled.ul``;
 
 const Coin = styled.li`
-  background-color: white;
+  background-color: ${(props) => props.theme.divColor};
   color: ${(props) => props.theme.textColor};
   margin-bottom: 10px;
   border-radius: 15px;
@@ -58,6 +59,18 @@ const Img = styled.img`
   margin-right: 10px;
 `;
 
+const ToggleButton = styled.button`
+  position: absolute;
+  right: 10px;
+  width: 50px;
+  height: 50px;
+  padding: 10px;
+  border-radius: 50%;
+  border: none;
+  background-color: ${(props) => props.theme.divColor};
+  font-size: 20px;
+`;
+
 interface ICoin {
   id: string;
   name: string;
@@ -71,6 +84,7 @@ interface ICoin {
 function Coins() {
   const { isLoading, data } = useQuery<ICoin[]>("allCoins", fetchCoins);
   const setDarkAtom = useSetRecoilState(isDarkAtom);
+  const darkAtom = useRecoilValue(isDarkAtom);
   const toggleDarkAtom = () => setDarkAtom((prev) => !prev);
   return (
     <Container>
@@ -79,7 +93,7 @@ function Coins() {
       </Helmet>
       <Header>
         <Title>Coins</Title>
-        <button onClick={toggleDarkAtom}>Toggle</button>
+        <ToggleButton onClick={toggleDarkAtom}>{darkAtom ? "🌝" : "🌞"}</ToggleButton>
       </Header>
       {isLoading ? (
         <Loader>Loading...</Loader>
@@ -89,7 +103,7 @@ function Coins() {
             <Coin key={coin.id}>
               <Link to={`/${coin.id}`} state={{ name: coin.name }}>
                 <Img src={`https://cryptocurrencyliveprices.com/img/${coin.id}.png`} />
-                {coin.name} &rarr;
+                {coin.name}
               </Link>
             </Coin>
           ))}

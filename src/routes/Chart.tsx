@@ -34,7 +34,7 @@ function Chart() {
         <ApexCharts
           series={[
             {
-              name: "Price",
+              name: "Line",
               type: "line",
               data: Array.isArray(data)
                 ? data?.map((price) => ({
@@ -64,7 +64,7 @@ function Chart() {
             },
             stroke: {
               curve: "smooth",
-              width: 1,
+              width: 2,
             },
             yaxis: {
               show: false,

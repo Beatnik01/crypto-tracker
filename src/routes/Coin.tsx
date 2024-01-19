@@ -43,7 +43,7 @@ const Img = styled.img`
 const Overview = styled.div`
   display: flex;
   justify-content: space-between;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: ${(props) => props.theme.divColor};
   padding: 10px 20px;
   border-radius: 10px;
 `;
@@ -61,8 +61,6 @@ const Prices = styled.div`
 
 const Price = styled.span``;
 
-const Change = styled.span``;
-
 const Description = styled.p`
   margin: 20px 0px;
   text-align: justify;
@@ -73,6 +71,9 @@ const Tabs = styled.div`
   grid-template-columns: repeat(2, 1fr);
   margin: 25px 0px;
   gap: 10px;
+  background-color: ${(props) => props.theme.divColor};
+  padding: 10px 20px;
+  border-radius: 10px;
 `;
 
 const Tab = styled.span<{ $isActive: boolean }>`
@@ -173,7 +174,7 @@ function Coin() {
       </Helmet>
       <Header>
         <TitleBtn>
-          <Link to={"/"}>←</Link>
+          <Link to={"/"}>🏠</Link>
         </TitleBtn>
         <Title>
           <Img src={`https://cryptocurrencyliveprices.com/img/${coinId}.png`} />
@@ -194,7 +195,6 @@ function Coin() {
               <span>Price</span>
               <Prices>
                 <Price>${trickersData?.quotes.USD.price.toFixed(0)}</Price>
-                <Change>{trickersData?.quotes.USD.percent_change_15m}</Change>
               </Prices>
             </OverviewItem>
             <OverviewItem>
