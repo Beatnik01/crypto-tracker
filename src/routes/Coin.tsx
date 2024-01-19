@@ -4,6 +4,8 @@ import { Outlet, useLocation, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { fetchCoinInfo, fetchCoinTickers } from "../api";
 import { Helmet } from "react-helmet-async";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { isDarkAtom } from "../atoms";
 
 const Container = styled.div`
   padding: 0px 20px;
@@ -93,6 +95,17 @@ const Tab = styled.span<{ $isActive: boolean }>`
   }
 `;
 
+const ToggleButton = styled.button`
+  width: 50px;
+  height: 50px;
+  padding: 10px;
+  border-radius: 50%;
+  border: none;
+  background-color: ${(props) => props.theme.divColor};
+  font-size: 20px;
+  cursor: pointer;
+`;
+
 interface RouteState {
   state: { name: string };
 }
@@ -166,6 +179,9 @@ function Coin() {
     ["trickers", coinId],
     () => fetchCoinTickers(coinId)
   );
+  const setDarkAtom = useSetRecoilState(isDarkAtom);
+  const darkAtom = useRecoilValue(isDarkAtom);
+  const toggleDarkAtom = () => setDarkAtom((prev) => !prev);
   const loading = infoLoading || trickersLoading;
   return (
     <Container>
@@ -180,7 +196,7 @@ function Coin() {
           <Img src={`https://cryptocurrencyliveprices.com/img/${coinId}.png`} />
           {state?.name || infoData?.name}
         </Title>
-        <TitleBtn>→</TitleBtn>
+        <ToggleButton onClick={toggleDarkAtom}>{darkAtom ? "🌝" : "🌞"}</ToggleButton>
       </Header>
       {loading ? (
         <Loader>Loading...</Loader>

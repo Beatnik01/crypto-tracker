@@ -12,15 +12,21 @@ const Container = styled.div`
   margin: 0 auto;
 `;
 
+const TitleBtn = styled.div`
+  font-size: 30px;
+  font-weight: 800;
+`;
+
 const Header = styled.header`
   height: 10vh;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  position: relative;
 `;
 
-const CoinsList = styled.ul``;
+const CoinsList = styled.ul`
+  margin-left: -45px;
+`;
 
 const Coin = styled.li`
   background-color: ${(props) => props.theme.divColor};
@@ -60,8 +66,6 @@ const Img = styled.img`
 `;
 
 const ToggleButton = styled.button`
-  position: absolute;
-  right: 10px;
   width: 50px;
   height: 50px;
   padding: 10px;
@@ -93,6 +97,9 @@ function Coins() {
         <title>Coins</title>
       </Helmet>
       <Header>
+        <TitleBtn>
+          <Link to={"/crypto-tracker"}>🏠</Link>
+        </TitleBtn>
         <Title>Coins</Title>
         <ToggleButton onClick={toggleDarkAtom}>{darkAtom ? "🌝" : "🌞"}</ToggleButton>
       </Header>
